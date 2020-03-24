@@ -15,7 +15,7 @@ const authentication = async (to, from, next) => {
 }
 
 export default new Router({
-  mode: 'history',
+  mode: 'hash',
   routes: [
     {
       path: '/',
