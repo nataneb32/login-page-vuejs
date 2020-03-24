@@ -6,7 +6,7 @@ import store from '../store/store'
 
 Vue.use(Router)
 
-const authentication = (to, from, next) => {
+const authentication = async (to, from, next) => {
   if (store.state.isLogged) {
     next()
   } else {
@@ -15,6 +15,7 @@ const authentication = (to, from, next) => {
 }
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',

@@ -12,9 +12,18 @@ function sleep (ms) {
 
 const fetchApi = async (username, password) => {
   await sleep(1000)
-  return {
-    token: 'token',
-    username: username
+  console.log({username, password})
+  if (username === 'admin' && password === '123123') {
+    return {
+      token: 'token',
+      username: username
+    }
+  } else {
+    return {
+      error: {
+        message: 'Username or/and passoword is invalid.'
+      }
+    }
   }
 }
 
@@ -44,6 +53,7 @@ const mutations = {
       }
     })
     console.log(state)
+    console.log(localStorage.getItem('auth'))
   },
   [types.LOGIN_ERROR]: (state, message) => {
     Object.assign(state, {
@@ -55,6 +65,7 @@ const mutations = {
         message: message
       }
     })
+    localStorage.removeItem('auth')
   },
   [types.LOGIN_SUCESS]: (state, {username, token}) => {
     Object.assign(state, {
@@ -65,16 +76,21 @@ const mutations = {
       error: {
       }
     })
+    localStorage.setItem('auth', JSON.stringify(state))
   }
 }
-
-const state = {
-  isLogging: false,
-  isLogged: false,
-  token: '',
-  username: '',
-  error: {
-    message: ''
+let state
+try {
+  state = JSON.parse(localStorage.auth)
+} catch (err) {
+  state = {
+    isLogging: false,
+    isLogged: false,
+    token: '',
+    username: '',
+    error: {
+      message: ''
+    }
   }
 }
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="container w-25 text-center" id="app">
+  <div class="container h-100 d-flex flex-column justify-content-center align-items-center w-25 text-center" id="app">
     <img src="./assets/logo.png">
     <form>
   <div class="form-group">
@@ -8,10 +8,12 @@
   </div>
   <div class="form-group">
     <label for="exampleInputPassword1">Password</label>
-    <input v-model="user.passoword" type="password" class="form-control" id="exampleInputPassword1">
+    <input v-model="user.password" type="password" class="form-control" id="exampleInputPassword1">
   </div>
-  <button @click="login" class="btn btn-primary">Submit</button>
+  <button @click="login" class="btn ">Submit</button>
 </form>
+  <span class="error">{{this.$store.state.error.message}}</span>
+  <p class="tip">Username is <strong>admin</strong> and password is <strong>123123</strong></p>
   </div>
 </template>
 
@@ -38,4 +40,22 @@ export default {
 </script>
 
 <style>
+.error{
+  color: #f34040;
+}
+.tip {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  text-align: center;
+}
+body {
+  background: #7CB89D;
+  font-family: 'Baloo Thambi 2', cursive;
+  height: 100vh;
+}
+.btn {
+  background: #41B883;
+}
 </style>
